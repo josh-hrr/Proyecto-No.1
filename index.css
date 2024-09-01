@@ -116,6 +116,12 @@ input[type="number"] {
     text-align: center; 
 }
 
+.productos-lista p {
+    padding: 10px;
+    margin: 5px;
+    border: #000000 2px dotted;
+}
+
 
 
 @media (max-width: 768px) { 
