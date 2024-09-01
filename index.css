@@ -1,0 +1,172 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    border-radius: 20px;
+    background-image: url("./images/welcome.png");
+    color: white;
+    padding: 10px 20px;
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
+    text-shadow: 2px 2px 4px #000000;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+
+article {
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+
+.productos-lista img {
+    width: auto;
+    height: 150px !important;
+    margin: 20px;
+    object-fit: cover;
+}
+
+.productos-lista { 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.producto {
+    margin: 10px 0;
+    cursor: move;
+}
+
+.producto img {
+    width: 150px;
+    height: auto;
+}
+
+.cart-container {
+    border: 2px dashed #ccc;
+    padding: 20px;
+    width: 30%;
+}
+
+.cart-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+#cart-items {
+    list-style-type: none;
+    padding: 0;
+}
+
+#total-price {
+    font-weight: bold;
+}
+
+footer {
+    border-radius: 20px;
+    text-shadow: 2px 2px 4px #000000;
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    background-image: url("./images/welcome.png");
+}
+
+#cart-table th{ 
+    margin: 0;
+    border: #000000 1px solid;
+}
+
+#cart-table td{  
+    padding: 25px; 
+    border: #000000 1px solid;
+} 
+
+input[type="number"] { 
+    width: 50px; 
+    text-align: center; 
+}
+
+
+
+@media (max-width: 768px) { 
+    
+    body { margin: 20px; 
+    } 
+    header {
+        padding: 5px 10px;
+    } 
+    main {
+        flex-direction: column;
+        padding: 10px;
+    } 
+    .productos-lista {
+        width: 100%;
+    } 
+    .cart-container {
+        width: 80%;
+    } 
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    footer {
+        padding: 5px 0;
+    }  
+    .aside-section img {
+        display: none;
+    } 
+
+    
+    #cart-table th{ 
+        margin: 0;
+        border: #000000 1px solid;
+    }
+
+    #cart-table td{   
+        padding: 5px;
+        border: #000000 1px solid;
+    } 
+
+    input[type="number"] {  
+        text-align: center; 
+    }
+
+    .cart-section {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+}

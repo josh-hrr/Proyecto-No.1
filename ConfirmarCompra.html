@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Confirmar Compra</title>
+</head>
+<body>
+    <header>
+        <h1>Confirmar Compra</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+            </ul>
+        </nav>
+    </header> 
+    <main>
+        <section class="cart-section">
+            <h2>Carrito de Compras</h2>
+            <table id="cart-table">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th> 
+                    </tr>
+                </thead>
+                <tbody id="cart-items"></tbody>
+            </table>
+            <p>Total Final: $<span id="final-price">0.00</span></p>
+            <button id="finalize-purchase">Finalizar Compra</button>
+        </section>
+    </main> 
+    <footer>
+        <p>&copy; Josue Alexander Herrera Arreaga - 0900-20-9166</p>
+    </footer>
+
+    <script>
+        let db;
+        const request = indexedDB.open("CarritoDB", 1);
+
+        request.onsuccess = function(event) {
+            db = event.target.result;
+            loadCartForConfirmation();
+        };
+
+        request.onerror = function(event) {
+            console.error("Error opening IndexedDB:", event.target.errorCode);
+        };
+
+        const cartTable = document.getElementById("cart-items");
+        const finalPriceElement = document.getElementById("final-price");
+
+        function loadCartForConfirmation() {
+            const transaction = db.transaction(["Carrito"], "readonly");
+            const store = transaction.objectStore("Carrito");
+
+            let total = 0;
+
+            store.openCursor().onsuccess = function(event) {
+                const cursor = event.target.result;
+                if (cursor) {
+                    const item = cursor.value;
+                    const tr = document.createElement("tr");
+                    const price = parseFloat(item.price);
+
+                    tr.innerHTML = `
+                        <td>${item.name}</td>
+                        <td>$${price.toFixed(2)}</td>
+                        <td><input type="number" value="${item.quantity}" min="1" data-name="${item.name}"></td>
+                        <td>$${(price * item.quantity).toFixed(2)}</td>
+                        <td><button class="remove-item" data-name="${item.name}">X</button></td>
+                    `;
+                    cartTable.appendChild(tr);
+
+                    total += price * item.quantity;
+                    cursor.continue();
+                }
+                finalPriceElement.textContent = total.toFixed(2);
+ 
+                document.querySelectorAll("input[type='number']").forEach(input => {
+                    input.addEventListener('change', function() {
+                        updateQuantity(this.dataset.name, this.value);
+                    });
+                });
+
+                document.querySelectorAll(".remove-item").forEach(button => {
+                    button.addEventListener('click', function() {
+                        removeItem(this.dataset.name);
+                    });
+                });
+            };
+        }
+
+        function updateQuantity(name, quantity) {
+            const transaction = db.transaction(["Carrito"], "readwrite");
+            const store = transaction.objectStore("Carrito");
+
+            store.get(name).onsuccess = function(event) {
+                const item = event.target.result;
+                item.quantity = parseInt(quantity);
+                store.put(item);
+                location.reload();
+            };
+        }
+
+        function removeItem(name) {
+            const transaction = db.transaction(["Carrito"], "readwrite");
+            const store = transaction.objectStore("Carrito");
+
+            store.delete(name).onsuccess = function() {
+                location.reload();
+            };
+        }
+
+        document.getElementById("finalize-purchase").addEventListener("click", function() {
+            const transaction = db.transaction(["Carrito"], "readwrite");
+            const store = transaction.objectStore("Carrito");
+
+            store.clear().onsuccess = function() {
+                alert("¡Compra finalizada! Pudes seguir comprando");
+                window.location.href = "productos.html";
+            };
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Productos - Tienda de Juegos</title>
+</head>
+<body>
+    <header>
+        <h1 class="productos-titulo">Productos</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="productos.html">Productos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container">  
+        <section class="productos-lista"> 
+            <div class="producto" draggable="true" data-name="Videojuego 1" data-price="30.99">
+                <img src="images/juego1.png" alt="Videojuego 1">
+                <p>Videojuego 1 - $30.99</p>
+            </div>
+            <div class="producto" draggable="true" data-name="Videojuego 2" data-price="40.99">
+                <img src="images/juego2.png" alt="Videojuego 2">
+                <p>Videojuego 2 - $40.99</p>
+            </div>
+            <div class="producto" draggable="true" data-name="Videojuego 3" data-price="49.99">
+                <img src="images/juego3.png" alt="Videojuego 3">
+                <p>Videojuego 3 - $49.99</p>
+            </div>
+            
+            <div class="producto" draggable="true" data-name="Videojuego 4" data-price="70.99">
+                <img src="images/juego4.png" alt="Videojuego 4">
+                <p>Videojuego 4 - $70.99</p>
+            </div>
+            <div class="producto" draggable="true" data-name="Videojuego 5" data-price="29.99">
+                <img src="images/juego5.png" alt="Videojuego 5">
+                <p>Videojuego 5 - $29.99</p>
+            </div>
+            <div class="producto" draggable="true" data-name="Videojuego 6" data-price="35.00">
+                <img src="images/juego6.png" alt="Videojuego 6">
+                <p>Videojuego 6 - $35.00</p>
+            </div>
+        </section>
+        <aside class="cart-container" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <h2 class="cart-title">Carrito de Compras</h2>
+            <ul id="cart-items">
+                <!-- cesta -->
+            </ul>
+            <p>Total: $<span id="total-price">0.00</span></p>
+            <p>Comprando desde: <span id="country"></span></p>
+            <button id="confirm-purchase">Confirmar Compra</button>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; Josue Alexander Herrera Arreaga - 0900-20-9166</p>
+    </footer>
+    <script src="geolocation.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
